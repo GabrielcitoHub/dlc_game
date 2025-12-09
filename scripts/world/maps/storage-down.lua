@@ -10,7 +10,7 @@ return {
   tilewidth = 40,
   tileheight = 40,
   nextlayerid = 11,
-  nextobjectid = 172,
+  nextobjectid = 175,
   properties = {
     ["border"] = "green_sloppy",
     ["music"] = "tv_changingroom",
@@ -596,6 +596,19 @@ return {
           properties = {
             ["money"] = 250
           }
+        },
+        {
+          id = 174,
+          name = "pushblock_board",
+          type = "",
+          shape = "rectangle",
+          x = 480,
+          y = 240,
+          width = 40,
+          height = 40,
+          rotation = 0,
+          visible = true,
+          properties = {}
         }
       }
     },

@@ -48,18 +48,17 @@ end
 function BoardUI:update()
     super.update(self)
 
-    local p = Game.world.board.player
+    local p = Game.world.board.player or Game.world.boardPlayer
+	if not p then return end
     if self.canceltimer >= self.canceltime then
         self:quit()
     end
 	
     if Input.pressed("confirm") and not Game.world:hasCutscene() then
-        if p:interact() then
-            Input.clear("confirm")
-        else
+        if not p:interact() then
             p:characterAction()
-            Input.clear("confirm")
         end
+		Input.clear("confirm")
     end
 	
 	local canceltimerprogress = true

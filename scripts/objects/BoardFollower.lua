@@ -121,7 +121,7 @@ function BoardFollower:updatePlayer()
 end
 
 function BoardFollower:getTarget()
-    return Game.world.board.player
+    return Game.world.board.player or Game.world.boardPlayer
 end
 
 function BoardFollower:getTargetPosition()

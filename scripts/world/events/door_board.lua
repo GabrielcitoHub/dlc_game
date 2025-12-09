@@ -35,6 +35,16 @@ function Door:init(data)
     self.box = properties["box"] or false
     self.opensprite = properties["opensprite"]
     self.closedsprite = properties["sprite"]
+    self.flag = properties["flag"]
+    self.flagvalue = properties["flagvalue"] or true
+
+    if self.flag then
+        local flag = Game:getFlag(self.flag)
+        -- print(self.flag .. " (" .. flag .. ") == " .. tostring(self.flagvalue))
+        if flag == self.flagvalue then
+            self.open = true
+        end
+    end
 
     self:setScale(1)
     --self:setOrigin(0.5, 0.5)

@@ -122,7 +122,7 @@ function BoardWorld:init(map, x, y)
         ["time"] = function () return ((Kristal.getTime() * 30)/2) % 3 end,
         ["texsize"] = {1/self.camera.width, 1/self.camera.height},
     }))
-	
+    	
 	self.rafting = false
 	self.targets_can_update_cam = true
 end
@@ -1248,8 +1248,10 @@ function BoardWorld:update()
 
     local half_alpha = self.battle_alpha * 0.52
 
-    for _,v in ipairs(self.followers) do
-        v.sprite:setColor(1 - half_alpha, 1 - half_alpha, 1 - half_alpha, 1)
+    if self.followers then
+        for _,v in ipairs(self.followers) do
+            v.sprite:setColor(1 - half_alpha, 1 - half_alpha, 1 - half_alpha, 1)
+        end
     end
 
     for _,battle_border in ipairs(self.map.battle_borders) do
@@ -1306,39 +1308,40 @@ function BoardWorld:draw()
 end
 
 function BoardWorld:cameraUpdate() -- this whole thing scares me
-	local target = self.player
+
+    local target = self.player
 	if self.targets_can_update_cam then
 		target = self:getCameraTarget()
 	end
-    if target then
-        local px = target.x
-        local py = target.y
-        local grid_w = 192 * 2
-        local grid_h = 256
+    if not target then return end
 
-        local xa = math.floor((px + 15) / grid_w) * grid_w + 192
-        local ya = math.floor((py + 8) / grid_h) * grid_h + 176
+    local px = target.x
+    local py = target.y
+    local grid_w = 192 * 2
+    local grid_h = 256
 
-        local xb = math.floor((px - 15) / grid_w) * grid_w + 192
-        local yb = math.floor((py - 24) / grid_h) * grid_h + 176
-        
-        local x1,y1,x2,y2 = self:getAreaBounds()
+    local xa = math.floor((px + 15) / grid_w) * grid_w + 192
+    local ya = math.floor((py + 8) / grid_h) * grid_h + 176
 
-        if not self.swapping_grid and not Game.lock_movement then
-            local x = math.floor(px / grid_w) * grid_w + 192
-            local y = math.floor(py / grid_h) * grid_h + 176
-            if px < x1 then
-                self:shiftGrid("left")
-            elseif px > x2 then
-                self:shiftGrid("right")
-            elseif py < y1 then
-                self:shiftGrid("up")
-            elseif py > y2 then
-                self:shiftGrid("down")
-            end
-            --self.swapping_grid = true
-            --Game.lock_movement = true
+    local xb = math.floor((px - 15) / grid_w) * grid_w + 192
+    local yb = math.floor((py - 24) / grid_h) * grid_h + 176
+    
+    local x1,y1,x2,y2 = self:getAreaBounds()
+
+    if not self.swapping_grid and not Game.lock_movement then
+        local x = math.floor(px / grid_w) * grid_w + 192
+        local y = math.floor(py / grid_h) * grid_h + 176
+        if px < x1 then
+            self:shiftGrid("left")
+        elseif px > x2 then
+            self:shiftGrid("right")
+        elseif py < y1 then
+            self:shiftGrid("up")
+        elseif py > y2 then
+            self:shiftGrid("down")
         end
+        --self.swapping_grid = true
+        --Game.lock_movement = true
     end
 end
 
@@ -1356,7 +1359,7 @@ function BoardWorld:shiftGrid(direction, after)
         x = x - 1
     end
     local cx, cy = self:getAreaCenter(x, y)
-	local xx, yy = self:getAreaPosition(x, y)
+    local xx, yy = self:getAreaPosition(x, y)
 	local c, r = self:getArea(xx, yy)
 	local x1, y1, x2, y2 = self:getAreaBounds(c,r)
     if direction == "up" then
@@ -1417,12 +1420,14 @@ function BoardWorld:getArea(x, y)
 end
 
 function BoardWorld:snapPlayer(dir, x, y)
-    local c, r = self:getArea(x, y)
-    local x1, y1, x2, y2 = self:getAreaBounds(c,r)
-	local target = self.player
-	if self.targets_can_update_cam then
+    local target = self.player
+    if self.targets_can_update_cam then
 		target = self:getCameraTarget()
 	end
+    if not target then return end
+
+    local c, r = self:getArea(x, y)
+    local x1, y1, x2, y2 = self:getAreaBounds(c,r)
     if dir == "left" then
         target.x = x1
     elseif dir == "right" then

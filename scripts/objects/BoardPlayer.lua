@@ -8,6 +8,7 @@ function BoardPlayer:init(chara, x, y)
 
     self.world = Game.world.board
     self.is_player = true
+    self.is_boardPlayer = true
 
     self.state_manager = StateManager("WALK", self, true)
     self.state_manager:addState("WALK", { update = self.updateWalk })
@@ -34,7 +35,7 @@ function BoardPlayer:init(chara, x, y)
     self.persistent = true
     self.noclip = false
 
-    self.charas = {"kris", "susie", "ralsei", "lancer", "noelle", "hero", "jamm", "len"} 
+    self.charas = {"kris", "susie", "ralsei", "lancer", "noelle", "hero", "jamm", "len"}
 
     self.chara_state = "none"
 
@@ -231,7 +232,7 @@ function BoardPlayer:isMovementEnabled()
         and self.world.state == "GAMEPLAY"
         and self.hurt_timer <= 1
         and Game.world.door_delay == 0
-		and not self.world.rafting
+        and not self.world.rafting
 end
 
 function BoardPlayer:isHurtingEnabled()
@@ -412,7 +413,9 @@ function BoardPlayer:switchCharacter()
         end
     end
 
-    local b = self.world.ui.healthbars[1]
+    local ui = self.world.ui
+    if not ui then return end
+    local b = ui.healthbars[1]
     b:init(b.x, b.y, self.actor)
 end
 
@@ -506,8 +509,12 @@ function BoardPlayer:updateHistory()
     end
 
     -- Need this for ralsei
-    for _, follower in ipairs(Game.world.board.followers) do
-        follower:updateHistory(moved, auto)
+    local board = Game.world.board or Game.world
+    local followers = board.followers or board.boardFollowers
+    if followers then
+        for _, follower in ipairs(followers) do
+            follower:updateHistory(moved, auto)
+        end
     end
 
     self.last_move_x = self.x

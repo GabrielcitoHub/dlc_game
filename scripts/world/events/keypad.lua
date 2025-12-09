@@ -52,6 +52,8 @@ function Keypad:init(data)
     self.numbers = properties["numbers"] or 4
     self.padnumbers = properties["padnumbers"] or properties["pad"] or self.numbers
     self.pass = properties["pass"] or properties["password"] or 1234
+    self.setflag = properties["setflag"]
+    self.setflagvalue = properties["setflagvalue"] or true
 
     self:setScale(1)
     self:setOrigin(0.5, 1)
@@ -62,6 +64,9 @@ function Keypad:tryOpen(c)
     if self.open == true then
         self:setSprite("world/events/keypad/success")
         if c then
+            if self.setflag then
+                Game:setFlag(self.setflag, self.setflagvalue)
+            end
             if self.sound then
                 Assets.playSound(self.sound)
             end

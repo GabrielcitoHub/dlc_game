@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="16" height="12" tilewidth="40" tileheight="40" infinite="0" nextlayerid="12" nextobjectid="184">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="16" height="12" tilewidth="40" tileheight="40" infinite="0" nextlayerid="13" nextobjectid="187">
  <editorsettings>
   <export target="storage-arcade.lua" format="lua"/>
  </editorsettings>
@@ -20,22 +20,6 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="10" name="tv" width="16" height="12">
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,80,80,80,80,80,80,80,80,80,80,0,0,0,
-0,0,0,68,0,0,0,0,0,0,0,0,70,0,0,0,
-0,0,0,68,0,0,0,0,0,0,0,0,70,0,0,0,
-0,0,0,68,0,0,0,0,0,0,0,0,70,0,0,0,
-0,0,0,68,0,0,0,0,0,0,0,0,70,0,0,0,
-0,0,0,68,0,0,0,0,0,0,0,0,70,0,0,0,
-0,0,0,75,76,76,76,76,76,76,76,76,77,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -74,14 +58,30 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup color="#0000ff" id="3" name="collision" visible="0" opacity="0.5">
+ <layer id="10" name="tv" width="16" height="12">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,68,0,0,0,0,0,0,0,0,70,0,0,0,
+0,0,0,68,0,0,0,0,0,0,0,0,70,0,0,0,
+0,0,0,68,0,0,0,0,0,0,0,0,70,0,0,0,
+0,0,0,68,0,0,0,0,0,0,0,0,70,0,0,0,
+0,0,0,68,0,0,0,0,0,0,0,0,70,0,0,0,
+0,0,0,75,76,76,76,76,76,76,76,76,77,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup color="#0000ff" id="3" name="collision" opacity="0.5">
   <object id="157" x="-40" y="360" width="40" height="120"/>
   <object id="158" x="0" y="480" width="640" height="40"/>
-  <object id="160" x="120" y="280" width="400" height="40"/>
-  <object id="181" x="40" y="320" width="40" height="40"/>
-  <object id="182" x="560" y="320" width="40" height="40"/>
+  <object id="160" x="120" y="296" width="400" height="24"/>
   <object id="173" x="0" y="0" width="40" height="360"/>
   <object id="174" x="80" y="40" width="40" height="320"/>
+  <object id="185" x="119" y="80" width="21" height="217"/>
+  <object id="186" x="500" y="80" width="21" height="215.5"/>
   <object id="175" x="520" y="40" width="40" height="320"/>
   <object id="176" x="600" y="0" width="40" height="360"/>
   <object id="167" x="290" y="320" width="80" height="40"/>
@@ -111,7 +111,28 @@
     <property name="text" value="* (The sign is too high up to read it)"/>
    </properties>
   </object>
+  <object id="184" name="detach_board" x="272.25" y="114.25" width="32" height="8">
+   <properties>
+    <property name="detach" type="bool" value="false"/>
+   </properties>
+  </object>
  </objectgroup>
+ <layer id="12" name="tvtop" width="16" height="12">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,80,80,80,80,80,80,80,80,80,80,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
  <objectgroup color="#7f00ff" id="5" name="markers">
   <object id="162" name="entry" x="600" y="420">
    <point/>

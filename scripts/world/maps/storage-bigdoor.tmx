@@ -144,6 +144,7 @@
    <properties>
     <property name="door" type="object" value="184"/>
     <property name="pass" type="int" value="4223"/>
+    <property name="setflag" value="storagekeypadunlocked"/>
     <property name="sound" value="board/ominous"/>
    </properties>
    <point/>

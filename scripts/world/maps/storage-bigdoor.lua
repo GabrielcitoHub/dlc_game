@@ -553,6 +553,7 @@ return {
           properties = {
             ["door"] = { id = 184 },
             ["pass"] = 4223,
+            ["setflag"] = "storagekeypadunlocked",
             ["sound"] = "board/ominous"
           }
         },
